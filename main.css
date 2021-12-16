@@ -1,0 +1,25 @@
+.center{
+    text-align: center;
+}
+@font-face {
+    font-family: oldarial;
+    src: url("font.ttf");
+}
+body {
+    font-family: oldarial;
+    font-size: 150%;
+    background-color: #1e1e1e;
+    color: lightgray;
+}
+a:link {
+    color: lightgrey;
+}
+a:visited {
+    color: lightgray;
+}
+a:hover {
+    color: red;
+}
+.invidible {
+    color: lightgrey;
+}
