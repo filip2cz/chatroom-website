@@ -5,7 +5,7 @@ class Asymmetric {
 	static async new() {
 		const key = new Asymmetric();
 
-		const pair = await window.crypto.subtle.generateKey(
+		const pair = await crypto.subtle.generateKey(
 			{
 				name: "RSA-OAEP",
 				hash: "SHA-256",
@@ -22,7 +22,7 @@ class Asymmetric {
 	}
 
 	static async import(public_key, private_key) {
-		public_key = await window.crypto.subtle.importKey(
+		public_key = await crypto.subtle.importKey(
 			"spki",
 			public_key,
 			{ name: "RSA-OAEP", hash: "SHA-256" },
@@ -32,7 +32,7 @@ class Asymmetric {
 		let key = new Asymmetric();
 		key.public = public_key;
 		if (private_key) {
-			key.private = await window.crypto.subtle.importKey(
+			key.private = await crypto.subtle.importKey(
 				"spki",
 				private_key,
 				{ name: "RSA-OAEP", hash: "SHA-256" },
@@ -45,15 +45,15 @@ class Asymmetric {
 	}
 
 	async export_public() {
-		return await window.crypto.subtle.exportKey("spki", this.public);
+		return await crypto.subtle.exportKey("spki", this.public);
 	}
 
 	async encrypt(msg) {
-		return await window.crypto.subtle.encrypt({ name: "RSA-OAEP" }, this.public, msg);
+		return await crypto.subtle.encrypt({ name: "RSA-OAEP" }, this.public, msg);
 	}
 
 	async decrypt(msg) {
-		return await window.crypto.subtle.decrypt({ name: "RSA-OAEP" }, this.private, msg);
+		return await crypto.subtle.decrypt({ name: "RSA-OAEP" }, this.private, msg);
 	}
 }
 
@@ -63,12 +63,12 @@ class Symmetric {
 		if (key) {
 			this.key = key;
 		} else {
-			this.key = window.crypto.getRandomValues(new Uint8Array(16));
+			this.key = crypto.getRandomValues(new Uint8Array(16));
 		}
 	}
 
 	async encrypt(msg) {
-		const iv = window.crypto.getRandomValues(new Uint8Array(12));
+		const iv = crypto.getRandomValues(new Uint8Array(12));
 		const alg = { name: "AES-GCM", iv: iv };
 		const aes = await crypto.subtle.importKey("raw", this.key, alg, false, ["encrypt"]);
 		// return iv + await crypto.subtle.encrypt(alg, aes, msg);

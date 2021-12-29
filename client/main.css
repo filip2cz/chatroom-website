@@ -6,6 +6,8 @@ body {
 	background-color: #1e1e1e;
 	color: lightgrey;
 	font-family: consolas;
+	/* font-family: Arial, Helvetica, sans-serif; */
+	font-weight: 700;
 	height: 100%;
 	--input-background: #121212;
 	--background-dark-1: #181818;
@@ -13,7 +15,7 @@ body {
 	--backgrounf-dark-3: 383838;
 	--background-light-1: #717171;
 
-	--main-color: red;
+	--main-color: rgb(77, 166, 255);
 }
 
 .center-main-content {
@@ -42,7 +44,7 @@ body {
 .connect-input {
 	background-color: #2e2e2e;
 	border: 2px solid #1e1e1e;
-	border-radius: 15px;
+	border-radius: 8px;
 	color: lightgrey;
 	padding: 0px 10px;
 	transition-duration: 300ms;
@@ -57,7 +59,7 @@ input[type="button"] {
 	background-color: #2e2e2e;
 	/* border: solid 2px purple; */
 	border: solid 2px #3e3e3e;
-	border-radius: 20px;
+	border-radius: 8px;
 	color: whitesmoke;
 	transition-duration: 100ms;
 	width: 130px;
@@ -67,19 +69,27 @@ input[type="button"] {
 input[type="button"]:hover {
 	/* background-color: purple; */
 	background-color: #3e3e3e;
-	border-color: purple;
+	border-color: rgb(77, 166, 255);
 	color: whitesmoke;
 }
 
 input[type="button"]:active {
-	background-color: purple;
+	background-color: rgb(77, 166, 255);
 }
 
 .connect-disconnect-container {
 	margin-left: auto;
+	flex-direction: row;
+	display: flex;
+	align-items: center;
 }
 
-.connect-input:focus {
+.status-dot {
+	background-color: red;
+	width: 10px;
+	height: 10px;
+	margin-right: 7px;
+	border-radius: 50%;
 }
 
 .input-container {
@@ -109,10 +119,11 @@ input[type="button"]:active {
 	flex-direction: column;
 	justify-content: center;
 	font-weight: 1000;
+	color: rgb(77, 166, 255);
 }
 
 input[type="text"]:focus {
-	border-color: purple;
+	border-color: rgb(77, 166, 255);
 	background-color: #1e1e1e;
 	outline: none;
 }
@@ -130,13 +141,6 @@ input[type="text"]:focus {
 	transition-duration: 200ms;
 	margin-left: 10px;
 }
-/* #msg-inp::hover {
-	background-color: #1e1e1e;
-	content: "gay";
-	width: 100%;
-	height: 1px;
-	background-color: purple;
-}*/
 
 .input-area {
 	display: flex;

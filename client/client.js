@@ -13,7 +13,7 @@ class Client {
 		this.socket = new WebSocket(`ws://${this.ip}:${this.port}/`);
 
 		this.socket.onopen = async (_) => {
-			console.log('opened');
+			// console.log('opened');
 			this.socket.onmessage = async (event) => {
 				if (!this.remote_key) {
 					this.remote_key = true;
@@ -24,12 +24,12 @@ class Client {
 						await new Response(event.data).arrayBuffer()
 					);
 					this.sym = new Symmetric(key_data);
-					console.log(this.sym);
+					// console.log(this.sym);
 				} else {
 					const text_en = await new Response(event.data).arrayBuffer();
 					const text_byte = await this.sym.decrypt(text_en);
 					const text = new TextDecoder("UTF-8").decode(text_byte);
-					console.log(`text: ${text}`);
+					// console.log(`text: ${text}`);
 					const [me, nick, content] = text.split(NAME_SPLITTER);
 					this.onmsg(nick, content);
 
@@ -53,7 +53,7 @@ class Client {
 	}
 
 	async send_str(msg) {
-		console.log(this);
+		// console.log(this);
 		const array_msg = new TextEncoder("utf-8").encode(msg);
 		// const encrypted = await this.remote_key.encrypt(array_msg);
 		const encrypted = await this.sym.encrypt(array_msg);
