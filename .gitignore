@@ -1,2 +1,4 @@
 passcode.txt
-webext-signed-games/*
+/webext-signed-games/
+*.html
+!*.unsigned.html
