@@ -46,6 +46,7 @@ jobs:
           cp ../.github/workflows/page-signer-edited.js ./
           cd ..
           chmod 700 ./webext-signed-pages/page-signer-edited.js
+          gpg --export -a henshouse > pub.key
           node ./webext-signed-pages/page-signer-edited.js index.unsigned.html index.html
           node ./webext-signed-pages/page-signer-edited.js download.unsigned.html download.html
           node ./webext-signed-pages/page-signer-edited.js faq.unsigned.html faq.html
