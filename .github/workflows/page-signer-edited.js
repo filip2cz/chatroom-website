@@ -10,17 +10,17 @@ function errorAbort(text) {
   process.exit(1);
 }
 
-function getSignature(content, callback) {
+function getSignature(content, passphraseFile, callback) {
   const tmpfile = `/tmp/${process.pid}`;
   fs.writeFileSync(tmpfile, content, 'utf-8');
   
-  // Uložení hesla do souboru
-  const passphraseFile = '/path/to/passphrase/file'; // Změň na cestu k souboru s heslem
-  const gpg = child_process.spawnSync('gpg', ['--armor', '--output', '-', '--detach-sign', '--passphrase-fd', '0', tmpfile], {
+  // Čtení hesla ze souboru
+  const passphrase = fs.readFileSync(passphraseFile, 'utf-8').trim();
+
+  const gpg = child_process.spawnSync('gpg', ['--armor', '--output', '-', '--detach-sign', '--passphrase', passphrase, tmpfile], {
     stdio: [
-      fs.openSync(passphraseFile, 'r'), // Otevření souboru s heslem pro čtení
+      0,
       'pipe',
-      process.stderr
     ]
   });
 
@@ -28,6 +28,11 @@ function getSignature(content, callback) {
 
   callback(gpg.stdout.toString());
 }
+
+const passphraseFile = './gpg_passphrase.txt';
+getSignature(contentToSign, passphraseFile, (signature) => {
+  console.log('Podepsaný obsah:', signature);
+});
 
 let args = process.argv.slice(2);
 
@@ -44,7 +49,7 @@ fs.readFile(filename, 'utf8', (err, data) => {
   }
 
   // Minimize and strip the doctype
-  const content = new Minimize({ spare: true, conditionals: true, empty: true, quotes: true }).parse(data)
+  const content = new Minimize({ spare:true, conditionals: true, empty: true, quotes: true }).parse(data)
     .replace(/^\s*<!doctype[^>]*>/i, '');
 
   getSignature(content, (signature) => {
