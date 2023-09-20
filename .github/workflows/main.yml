@@ -28,7 +28,7 @@ jobs:
           GPG_SIGNING_KEY: secrets.GPG_KEY
 
       - name: clone Signed Pages git, Install dependencies and sing index.html
-        run: git clone https://github.com/tasn/webext-signed-pages.git && cd webext-signed-pages && npm install && wget https://raw.githubusercontent.com/henshouse/henshouse.github.io/main/.github/workflows/page-signer.bash && cd .. && ./webext-signed-pages/page-signer.bash index.unsigned.html index.html
+        run: git clone https://github.com/tasn/webext-signed-pages.git && cd webext-signed-pages && npm install && wget https://raw.githubusercontent.com/henshouse/henshouse.github.io/main/.github/workflows/page-signer.bash && cd .. && chmod 700 ./webext-signed-pages/page-signer.bash && bash ./webext-signed-pages/page-signer.bash index.unsigned.html index.html
 
       - name: Deploy to GitHub Pages
         run: |
