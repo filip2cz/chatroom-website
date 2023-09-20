@@ -1,0 +1,3 @@
+/webext-signed-games/
+*.html
+!*.unsigned.html
