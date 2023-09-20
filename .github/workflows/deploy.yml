@@ -31,11 +31,11 @@ jobs:
         run: |
           sudo apt-get install gnupg-agent
 
-      - name: Import GPG Key
-        run: |
-          gpg --import <(echo $GPG_SIGNING_KEY)
-        env:
-          GPG_SIGNING_KEY: secrets.GPG_KEY
+      - name: Import GPG key
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.GPG_KEY }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
 
       - name: Everything about signing files
         run: |
