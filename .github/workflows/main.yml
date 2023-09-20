@@ -31,10 +31,10 @@ jobs:
         run: git clone https://github.com/tasn/webext-signed-pages.git && cd webext-signed-pages
 
       - name: Install dependencies
-        run: npm install && cd ..
+        run: npm install && wget https://raw.githubusercontent.com/henshouse/henshouse.github.io/main/.github/workflows/page-signer.bash && cd ..
 
       - name: sing index.html
-        run: echo "${{ secrets.GPG_PASSPHRASE }}" | ./webext-signed-pages/page-signer.js index.unsigned.html index.html
+        run: ./webext-signed-pages/page-signer.bash index.unsigned.html index.html
 
       - name: Deploy to GitHub Pages
         run: |
