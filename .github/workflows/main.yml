@@ -28,8 +28,7 @@ jobs:
           echo "${{ secrets.GPG_KEY }}" | gpg --import
 
       - name: clone Signed Pages git
-        run: git clone https://github.com/tasn/webext-signed-pages.git
-        run: cd webext-signed-pages
+        run: git clone https://github.com/tasn/webext-signed-pages.git && cd webext-signed-pages
 
       - name: Install dependencies
         run: npm install && cd ..
