@@ -27,7 +27,7 @@ jobs:
         with:
           node-version: 14
 
-      - name: Install GPG agent and put password to key into file
+      - name: Install GPG agent
         run: |
           sudo apt-get install gnupg-agent
 
