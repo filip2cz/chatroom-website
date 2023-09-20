@@ -55,6 +55,13 @@ jobs:
         env:
           GPG_SIGNING_KEY: secrets.GPG_PASSPHRASE
 
+      - name: Publish generated content to GitHub Pages
+        uses: tsunematsu21/actions-publish-gh-pages@v1.0.2
+        with:
+          dir: .
+          branch: main
+          token: ${{ secrets.ACCESS_TOKEN }}
+
   deploy:
     needs: signing
     environment:
