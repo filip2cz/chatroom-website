@@ -44,5 +44,5 @@ jobs:
         uses: tsunematsu21/actions-publish-gh-pages@v1.0.2
         with:
           dir: .
-          branch: gh-pages
+          branch: main
           token: ${{ secrets.ACCESS_TOKEN }}
