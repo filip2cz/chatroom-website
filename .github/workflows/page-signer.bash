@@ -11,7 +11,7 @@ get_signature() {
 
   echo "$content" > "$tmpfile"
   # Změna: Přidejte klíč, který chcete použít pro podpis
-  local keyid="VášGPGKlíčID"
+  local keyid="henshouse"
   gpg --default-key "$keyid" --armor --output - --detach-sign "$tmpfile"
   rm -f "$tmpfile"
 }
@@ -28,6 +28,9 @@ if [ ! -f "$filename" ]; then
 fi
 
 data=$(cat "$filename")
+
+echo $data
+echo $filename
 
 # Minimize and strip the doctype
 content=$(echo "$data" | npx minimize --spare --conditionals --empty --quotes | sed -e 's/^\s*<!doctype[^>]*>//i')
