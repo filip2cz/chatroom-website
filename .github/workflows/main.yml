@@ -24,7 +24,6 @@ jobs:
       - name: Fix GPG home directory permissions
         run: |
           chmod 700 /home/runner/work/_temp/.gnupg
-        if: env.GITHUB_ACTIONS
 
       - name: Import GPG key
         run: |
