@@ -55,17 +55,6 @@ jobs:
         env:
           GPG_SIGNING_KEY: secrets.GPG_PASSPHRASE
 
-      - name: Commit and Push
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git status --porcelain > changes.txt
-          if [ -s changes.txt ]; then
-            cat changes.txt | xargs -I {} git add {}
-            git commit -m "Commit changes" || true
-            git push
-          fi
-
   deploy:
     needs: signing
     environment:
