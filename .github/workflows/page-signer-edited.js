@@ -13,8 +13,6 @@ function errorAbort(text) {
 function getSignature(content, callback) {
   const tmpfile = `/tmp/${process.pid}`;
   const passcodeContent = process.env.GPG_SIGNING_KEY;
-  console.log("passcode:");
-  console.log(passcodeContent);
   fs.writeFileSync(tmpfile, content, 'utf-8');
   const gpg = child_process.spawnSync('gpg', [
     '--pinentry-mode', 'loopback',
