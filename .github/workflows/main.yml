@@ -21,6 +21,9 @@ jobs:
       - name: Install GPG agent
         run: sudo apt-get install gnupg-agent
 
+      - name: Create .gnupg directory
+        run: mkdir -p $HOME/.gnupg
+
       - name: Fix GPG home directory permissions
         run: |
           chmod 700 /home/runner/work/_temp/.gnupg
