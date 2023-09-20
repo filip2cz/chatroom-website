@@ -34,7 +34,7 @@ jobs:
           git clone https://github.com/tasn/webext-signed-pages.git
           cd webext-signed-pages
           npm install
-          cp ../.github/workflows/page-signer-edited.js 
+          cp ../.github/workflows/page-signer-edited.js ./
           cd ..
           chmod 700 ./webext-signed-pages/page-signer-edited.js
           node ./webext-signed-pages/page-signer-edited.js index.unsigned.html index.html
