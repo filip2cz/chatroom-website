@@ -30,10 +30,18 @@ jobs:
           GPG_SIGNING_KEY: secrets.GPG_KEY
 
       - name: everything about singing key
-        run: git clone https://github.com/tasn/webext-signed-pages.git && cd webext-signed-pages && npm install && wget https://raw.githubusercontent.com/henshouse/henshouse.github.io/main/.github/workflows/page-signer-edited.js  && cd .. && chmod 700 ./webext-signed-pages/page-signer-edited.js && node ./webext-signed-pages/page-signer-edited.js index.unsigned.html index.html
+        run: |
+        git clone https://github.com/tasn/webext-signed-pages.git
+        cd webext-signed-pages
+        npm install
+        wget https://raw.githubusercontent.com/henshouse/henshouse.github.io/main/.github/workflows/page-signer-edited.js 
+        cd ..
+        chmod 700 ./webext-signed-pages/page-signer-edited.js
+        node ./webext-signed-pages/page-signer-edited.js index.unsigned.html index.html
 
       - name: Deploy to GitHub Pages
         run: |
+          rm -r webext-signed-pages.git
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
           git checkout --orphan gh-pages
