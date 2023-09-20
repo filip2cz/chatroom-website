@@ -44,7 +44,7 @@ jobs:
         env:
           GPG_SIGNING_KEY: secrets.GPG_KEY
 
-      - name: Everything about singing files
+      - name: Everything about signing files
         run: |
           git clone https://github.com/tasn/webext-signed-pages.git
           cd webext-signed-pages
