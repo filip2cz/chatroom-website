@@ -1,4 +1,4 @@
-name: Sing html files for Signed Pages
+name: Sing html files and Deploy
 
 on:
   push:
