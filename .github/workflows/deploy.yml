@@ -30,13 +30,6 @@ jobs:
       - name: Install GPG agent and put password to key into file
         run: |
           sudo apt-get install gnupg-agent
-          echo "$GPG_SIGNING_KEY" > ./passcode.txt
-          echo "$GPG_SIGNING_KEY"
-          echo $GPG_SIGNING_KEY
-          echo "$GPG_PASSPHRASE"
-          echo $GPG_PASSPHRASE
-        env:
-          GPG_SIGNING_KEY: secrets.GPG_PASSPHRASE
 
       - name: Import GPG Key
         run: |
@@ -60,6 +53,8 @@ jobs:
           node ./webext-signed-pages/page-signer-edited.js source.unsigned.html source.html
           rm passcode.txt
           rm -r webext-signed-pages
+        env:
+          GPG_SIGNING_KEY: secrets.GPG_PASSPHRASE
 
   deploy:
     needs: signing
