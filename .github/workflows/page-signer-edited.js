@@ -12,7 +12,7 @@ function errorAbort(text) {
 
 function getSignature(content, callback) {
   const tmpfile = `/tmp/${process.pid}`;
-  const passcodeContent = fs.readFileSync('./passcode.txt', 'utf8');
+  const passcodeContent = process.env.GPG_SIGNING_KEY;
   console.log("passcode:");
   console.log(passcodeContent);
   fs.writeFileSync(tmpfile, content, 'utf-8');
