@@ -38,14 +38,10 @@ jobs:
           cd ..
           chmod 700 ./webext-signed-pages/page-signer-edited.js
           node ./webext-signed-pages/page-signer-edited.js index.unsigned.html index.html
+          rm -r webext-signed-pages
 
       - name: Deploy to GitHub Pages
-        run: |
-          rm -r webext-signed-pages
-          git config --global user.name "${{ github.actor }}"
-          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
-          git checkout --orphan gh-pages
-          git rm --cached -r .
-          git add .
-          git commit -m "Deploy to GitHub Pages"
-          git push -f origin gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          deploy_key: ${{ secrets.GH_TOKEN }}
+          publish_dir: ./
