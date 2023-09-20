@@ -21,6 +21,8 @@ jobs:
       - name: Import GPG key
         run: |
           echo "${{ secrets.GPG_KEY }}" | gpg --import
+        env:
+          GPG_TTY: no-tty
 
       - name: clone Signed Pages git
         run: git clone https://github.com/tasn/webext-signed-pages.git && cd webext-signed-pages
