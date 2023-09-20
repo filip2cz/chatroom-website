@@ -18,11 +18,16 @@ jobs:
         with:
           node-version: 14
 
+      - name: Install GPG agent
+        run: sudo apt-get install gnupg-agent
+
       - name: Import GPG key
         run: |
-          echo "${{ secrets.GPG_KEY }}" | gpg --import
+          mkdir -p $RUNNER_TEMP/.gnupg
+          echo "${{ secrets.GPG_KEY }}" | GNUPGHOME=$RUNNER_TEMP/.gnupg gpg --import
         env:
           GPG_TTY: no-tty
+
 
       - name: clone Signed Pages git
         run: git clone https://github.com/tasn/webext-signed-pages.git && cd webext-signed-pages
