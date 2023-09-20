@@ -20,6 +20,8 @@ function getSignature(content, callback) {
     ]
   });
 
+  console.log(gpg)
+
   fs.unlink(tmpfile, () => {});
 
   callback(gpg.stdout.toString());
