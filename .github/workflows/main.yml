@@ -19,7 +19,7 @@ jobs:
           node-version: 14
 
       - name: Install GPG agent and put password to key into file
-        run: sudo apt-get install gnupg-agent && echo "$GPG_PASSPHRASE" > ./passcode.txt
+        run: sudo apt-get install gnupg-agent && echo "$GPG_SIGNING_KEY" > ./passcode.txt
         env:
           GPG_SIGNING_KEY: secrets.GPG_PASSPHRASE
 
@@ -38,6 +38,7 @@ jobs:
           cd ..
           chmod 700 ./webext-signed-pages/page-signer-edited.js
           node ./webext-signed-pages/page-signer-edited.js index.unsigned.html index.html
+          rm passcode.txt
           rm -r webext-signed-pages
 
       - name: Publish generated content to GitHub Pages
