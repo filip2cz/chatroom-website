@@ -55,12 +55,16 @@ jobs:
         env:
           GPG_SIGNING_KEY: secrets.GPG_PASSPHRASE
 
-      - name: Publish generated content to GitHub Pages
-        uses: tsunematsu21/actions-publish-gh-pages@v1.0.2
-        with:
-          dir: .
-          branch: main
-          token: ${{ secrets.ACCESS_TOKEN }}
+      - name: Commit and Push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git status --porcelain > changes.txt
+          if [ -s changes.txt ]; then
+            cat changes.txt | xargs -I {} git add {}
+            git commit -m "Commit changes" || true
+            git push
+          fi
 
   deploy:
     needs: signing
