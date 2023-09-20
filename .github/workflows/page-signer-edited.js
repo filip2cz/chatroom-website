@@ -10,14 +10,11 @@ function errorAbort(text) {
   process.exit(1);
 }
 
-function getSignature(content, passphraseFile, callback) {
+function getSignature(content, callback) {
+  const passcode = fs.readFileSync('./passcode.txt', 'utf-8').trim();
   const tmpfile = `/tmp/${process.pid}`;
   fs.writeFileSync(tmpfile, content, 'utf-8');
-  
-  // Čtení hesla ze souboru
-  const passphrase = fs.readFileSync(passphraseFile, 'utf-8').trim();
-
-  const gpg = child_process.spawnSync('gpg', ['--armor', '--output', '-', '--detach-sign', '--passphrase', passphrase, tmpfile], {
+  const gpg = child_process.spawnSync('gpg', ['--armor', '--output', '-', '--detach-sign', '--passphrase', passcode, tmpfile], {
     stdio: [
       0,
       'pipe',
@@ -28,11 +25,6 @@ function getSignature(content, passphraseFile, callback) {
 
   callback(gpg.stdout.toString());
 }
-
-const passphraseFile = './gpg_passphrase.txt';
-getSignature(contentToSign, passphraseFile, (signature) => {
-  console.log('Podepsaný obsah:', signature);
-});
 
 let args = process.argv.slice(2);
 
