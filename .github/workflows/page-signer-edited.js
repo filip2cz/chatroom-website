@@ -12,12 +12,17 @@ function errorAbort(text) {
 
 function getSignature(content, callback) {
   const tmpfile = `/tmp/${process.pid}`;
+  const passcodeContent = fs.readFileSync('./passcode.txt', 'utf8');
   fs.writeFileSync(tmpfile, content, 'utf-8');
-  const gpg = child_process.spawnSync('cat ./passcode.txt | gpg', ['--pinentry-mode', 'loopback', '--passphrase-fd', '0', '--armor', '--output', '-', '--detach-sign', tmpfile], {
-    stdio: [
-      0,
-      'pipe',
-    ]
+  const gpg = child_process.spawnSync('gpg', [
+    '--pinentry-mode', 'loopback',
+    '--passphrase-fd', '0',
+    '--armor',
+    '--output', '-',
+    '--detach-sign', '-'
+  ], {
+    input: passcodeContent,
+    stdio: ['pipe', 'pipe', process.stderr],
   });
 
   fs.unlink(tmpfile, () => {});
