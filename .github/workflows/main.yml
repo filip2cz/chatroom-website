@@ -34,6 +34,7 @@ jobs:
         run: npm install && wget https://raw.githubusercontent.com/henshouse/henshouse.github.io/main/.github/workflows/page-signer.bash && cd ..
 
       - name: sing index.html
+        needs: Install dependencies
         run: ./webext-signed-pages/page-signer.bash index.unsigned.html index.html
 
       - name: Deploy to GitHub Pages
