@@ -51,7 +51,6 @@ jobs:
           node ./webext-signed-pages/page-signer-edited.js faq.unsigned.html faq.html
           node ./webext-signed-pages/page-signer-edited.js signed.unsigned.html signed.html
           node ./webext-signed-pages/page-signer-edited.js source.unsigned.html source.html
-          rm passcode.txt
           rm -r webext-signed-pages
         env:
           GPG_SIGNING_KEY: secrets.GPG_PASSPHRASE
