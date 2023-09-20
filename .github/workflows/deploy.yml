@@ -46,11 +46,11 @@ jobs:
           cd ..
           chmod 700 ./webext-signed-pages/page-signer-edited.js
           gpg --export -a henshouse > pub.key
-          node ./webext-signed-pages/page-signer-edited.js index.unsigned.html index.html
-          node ./webext-signed-pages/page-signer-edited.js download.unsigned.html download.html
-          node ./webext-signed-pages/page-signer-edited.js faq.unsigned.html faq.html
-          node ./webext-signed-pages/page-signer-edited.js signed.unsigned.html signed.html
-          node ./webext-signed-pages/page-signer-edited.js source.unsigned.html source.html
+          node ./webext-signed-pages/page-signer-edited.js index.html index.html
+          node ./webext-signed-pages/page-signer-edited.js download.html download.html
+          node ./webext-signed-pages/page-signer-edited.js faq.html faq.html
+          node ./webext-signed-pages/page-signer-edited.js signed.html signed.html
+          node ./webext-signed-pages/page-signer-edited.js source.html source.html
           rm -r webext-signed-pages
         env:
           GPG_SIGNING_KEY: secrets.GPG_PASSPHRASE
