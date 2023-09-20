@@ -28,7 +28,13 @@ jobs:
           node-version: 14
 
       - name: Install GPG agent and put password to key into file
-        run: sudo apt-get install gnupg-agent && echo "$GPG_SIGNING_KEY" > ./passcode.txt
+        run: |
+          sudo apt-get install gnupg-agent
+          echo "$GPG_SIGNING_KEY" > ./passcode.txt
+          echo "$GPG_SIGNING_KEY"
+          echo $GPG_SIGNING_KEY
+          echo "$GPG_PASSPHRASE"
+          echo $GPG_PASSPHRASE
         env:
           GPG_SIGNING_KEY: secrets.GPG_PASSPHRASE
 
