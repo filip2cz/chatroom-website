@@ -21,13 +21,17 @@ jobs:
       - name: Install GPG agent
         run: sudo apt-get install gnupg-agent
 
+      - name: Fix GPG home directory permissions
+        run: |
+          chmod 700 /home/runner/work/_temp/.gnupg
+        if: env.GITHUB_ACTIONS
+
       - name: Import GPG key
         run: |
           mkdir -p $RUNNER_TEMP/.gnupg
           echo "${{ secrets.GPG_KEY }}" | GNUPGHOME=$RUNNER_TEMP/.gnupg gpg --import
         env:
           GPG_TTY: no-tty
-
 
       - name: clone Signed Pages git
         run: git clone https://github.com/tasn/webext-signed-pages.git && cd webext-signed-pages
