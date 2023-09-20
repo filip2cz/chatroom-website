@@ -11,16 +11,15 @@ function errorAbort(text) {
 }
 
 function getSignature(content, callback) {
+  const passcode = fs.readFileSync('./passcode.txt', 'utf-8').trim();
   const tmpfile = `/tmp/${process.pid}`;
   fs.writeFileSync(tmpfile, content, 'utf-8');
-  const gpg = child_process.spawnSync('cat ../passcode.txt | gpg', ['--armor', '--output', '-', '--detach-sign', tmpfile], {
+  const gpg = child_process.spawnSync('gpg', ['--armor', '--output', '-', '--detach-sign', '--passphrase', passcode, tmpfile], {
     stdio: [
       0,
       'pipe',
     ]
   });
-
-  console.log(gpg)
 
   fs.unlink(tmpfile, () => {});
 
