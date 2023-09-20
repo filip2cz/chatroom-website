@@ -10,7 +10,9 @@ get_signature() {
   local tmpfile="/tmp/$$.tmp"
 
   echo "$content" > "$tmpfile"
-  gpg --armor --output - --detach-sign "$tmpfile"
+  # Změna: Přidejte klíč, který chcete použít pro podpis
+  local keyid="VášGPGKlíčID"
+  gpg --default-key "$keyid" --armor --output - --detach-sign "$tmpfile"
   rm -f "$tmpfile"
 }
 
