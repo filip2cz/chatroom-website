@@ -2,17 +2,17 @@
 <!--
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEXTaxkaAPIXlMU6Nwb8j+hNkQ/h8FAmUMBXQACgkQb8j+hNkQ
-/h8yTAv9FI2WLd/CPoS3pdzifdxAKoOdHJzEDS6jPOOpoMsaEsuNhWUs8xsN0kMK
-lVZE73Wgv2bqpOtwhnC8COUyUaXpaB89KFNStU5bDoqtcsmmdtz3lTolTYwaXccY
-LvO0sfUp4wCr5JbJtEcGIHB62F8ra8Ki8Xj6RCq3R7chbIjHNWPCGLuwIByI5MAh
-mytZF0iqAg8iJmlpl997BGVVZzptLP/i0YxBSDhGjSgXaqd0c/5i62/DiZfTOLUa
-z/pLrvORAPbxncAxX7K0pnkKjTEAOsDD6lg9BKfMRf0sIQkvJOjk7F6s06+x3syr
-X0SBTcP5nR+Szl3GQ5dVIsHzQBx8B92S083tYsMqN4MrS4JmPIHtydpjcmq/sxuw
-VSlpmLMhKmiC+zdvhS1LjmEK7HaYQEzkYIoZGWQMHqoFj7ukU1Pb2/gbihZYsWB6
-7Cgtf6uZrC4GnptfhHHedVoe0Sm+znqhJqgpHrZRjpvJjbrX2Th7PKD7uouWHkGy
-gXtDn/xa
-=qm/l
+iQGzBAABCgAdFiEEXTaxkaAPIXlMU6Nwb8j+hNkQ/h8FAmUMB48ACgkQb8j+hNkQ
+/h95QAwAwt5UPzcs+XWIiANuvdCJZcTCaGW5PGfCCDX0LNo5bw+2pSd6Hk050VA6
+JQAYEU+MChPV9xdicPzOZpaGNwtUNEPgh5naT6cXvXrHFUrpWWB6/iWCPp89RC1I
+/pTQl8dah7KhjOPidnlYSbiHO4BZo4IiV5ZJi2XBfdpGnx6E4zF8pSVx3eFaXmlN
+pFwRzOo+ArUuIye+4nsnKCj4EFadCO+cDZzMJDhC6/g1etBrL8ZHOSVCQivQJHv2
+xUCQ0o0CRTV/shYc2CefxNvCRLpnoewieIHxTHaJqJfvIfkVkDuUSk0xw+GP3N+0
+MOlM9Oj6eGeaTLcUVZkTaJ3PoB/glakBtViKmAD9vcvKglUaw/WBQfaQNlEERnUV
+ISUvZ4O+2LOnyqq3WnzZsDhauNUEBj0WeooX8ZfA1vIO5Wy+giBEMe4ZppX2cc7n
+uNvH19fajuUwPTk3Kqe6mggRHR53rklFOJZXNMbfNP4zEGOw7FlUa66/XARKmbgR
+NQqsgdxs
+=fzQH
 -----END PGP SIGNATURE-----
 
 -->
@@ -26,32 +26,18 @@ gXtDn/xa
 </head>
 
 <body>
-    <script>
-        // Získání odkazu na element, do kterého chcete vložit obsah
-        var keyElement = document.getElementById('key');
-
-        // Adresa URL, ze které chcete načíst obsah
-        var url = 'https://henshouse.github.io/key.pub';
-
-        // Použití Fetch API k načtení obsahu
-        fetch(url)
-            .then(response => {
-                // Zkontrolujeme, jestli je odpověď úspěšná (kód 200)
-                if (!response.ok) {
-                    throw new Error('failed');
-                }
-                // Přečteme obsah jako text
-                return response.text();
-            })
-            .then(data => {
-                // Vložíme načtený obsah do elementu na stránce
-                keyElement.textContent = data;
-            })
-            .catch(error => {
-                console.error('Error: ', error);
-            });
-    </script>
     <link rel="stylesheet" href="main.css">
+
+    <script>
+        var xhr= new XMLHttpRequest();
+        xhr.open('GET', 'pub.key', true);
+        xhr.onreadystatechange= function() {
+            if (this.readyState!==4) return;
+            if (this.status!==200) return; // or whatever error handling you want
+            document.getElementById('pubkey').innerHTML= this.responseText;
+        };
+        xhr.send();
+    </script>
 
     <h1 class="center">How to use Signed Pages extension</h1>
 
@@ -81,7 +67,7 @@ https://henshouse.github.io/*
 http://henshouse.github.io/*
 
 Pubkey:</pre>
-<pre id="key"></pre>
+<pre id="pubkey">pubkey did not loaded sucefully</pre>
     </ol>
 
 </body>
