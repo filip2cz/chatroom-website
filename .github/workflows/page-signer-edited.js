@@ -19,7 +19,8 @@ function getSignature(content, callback) {
     '--passphrase-fd', '0',
     '--armor',
     '--output', '-',
-    '--detach-sign', '-'
+    '--detach-sign', '-',
+    tmpfile
   ], {
     input: passcodeContent,
     stdio: ['pipe', 'pipe', process.stderr],
